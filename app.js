@@ -1,10 +1,13 @@
 $(document).ready(function() {
   // Get the Current Day and Time
   $('.currentDayAndTime').text(moment().format('LLLL'));
-  // update time every hour - call function on page refresh
+  // update time every hour - call function every hour and on page refresh
+  function updateTime() {
+    moment();
+  }
   // setInterval of function every 1000
   updateTime();
-  setInterval(updateTime(), 1000);
+  setInterval(updateTime(), 1000)
   // Here we are provided an initial array of letters.
   // Use this array to dynamically create time blocks by the hour - consider making half-hour increments.
   var timeHours = ["5:00 AM", "6:00 AM", "7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM", "7:00 PM", "8:00 PM"];
@@ -14,23 +17,23 @@ $(document).ready(function() {
     let $timeBlocDiv = $('<div>');
       $timeBlocDiv.addClass('row');
       let $hour = $('<div>');
-      $hour.addClass('row text-center time col-2').text('\n' + timeHours[i]);
+      $hour.addClass('row text-center time col-2').text(timeHours[i]);
       // create a textArea
       // add an input into the td
       // add class of form-control
       // Add class of timeHours for each text area******************************************************
       // add placeholder of to accomplish
     let $textarea = $('<textarea>');
-    $textarea.attr('id', timeHours[i]).attr("time-value", (5+i)).addClass('col-8 form-control rounded-0 textarea');
+    $textarea.attr('id', timeHours[i]).attr("time-value", (5+i)).addClass('col-8 form-control rounded-0 textarea text-dark');
     // alter the background as based on time.
     if ($textarea.attr("time-value") < moment().hour()) {
-      //if the time-value attribute is earlier than the current hour, then give it a class of past
+      //if the time-value attribute is earlier than the current hour add class of past
       $textarea.addClass("past");
     } else if ($textarea.attr("time-value") > moment().hour()) {
-      //if the time-value attribute is later than the current hour, then give it a class of future
+      //if the time-value attribute is later than the current hour add class of future
       $textarea.addClass("future");
     } else {
-      //if the time-value attribute is equal to the current hour, then give it a class of present
+      //if the time-value attribute is equal to the current hour add class of present
       $textarea.addClass("present");
     }
     // // create a td for the save button
@@ -70,6 +73,6 @@ $(document).ready(function() {
     // make the new task apart of the local storage array
     userTaskObjects[timeValue] = textUserInput;
     // send that information to the local storage
-    localStorage.setItem('textUserInput', JSON.stringify(userTaskObjects))
+    localStorage.setItem('textUserInput', JSON.stringify(userTaskObjects));
   });
 });
